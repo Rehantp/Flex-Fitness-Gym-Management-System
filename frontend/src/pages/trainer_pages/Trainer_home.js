@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 import "./TrainerReg.css";
 //import TraineD from './TrainerReg.module.css'
-import Footer from "../../components/Online-shopping-components/Footer";
+//import Footer from "../../components/Online-shopping-components/Footer";
 //create Trainer
 
 import { message } from "antd";
