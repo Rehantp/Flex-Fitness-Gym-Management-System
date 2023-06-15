@@ -7,7 +7,7 @@ const AWS = require("aws-sdk");
 //models check
 let Coach = require("../../models/UserModel");
 
-// S3 bucket Credintials
+// S3 bucket Credintials user your own one
 const s3 = new AWS.S3({
   accessKeyId: "AKIA6H2NBN6UTKXN5R4H",
   secretAccessKey: "jbTpxl2xcmtPMoVuiCr/TRjhrV5fIE2dDng65tGM",

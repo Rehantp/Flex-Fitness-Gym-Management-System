@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+
 import React, { useState } from "react";
 import axios from "axios";
 import {
@@ -6,11 +6,7 @@ import {
   Input,
   Row,
   Col,
-  TimePicker,
-  Select,
   Button,
-  Typography,
-  Upload,
 } from "antd";
 import {
   EyeInvisibleOutlined,
@@ -18,9 +14,7 @@ import {
   UploadOutlined,
 } from "@ant-design/icons";
 import "./TrainerReg.css";
-//import TraineD from './TrainerReg.module.css'
-//import Footer from "../../components/Online-shopping-components/Footer";
-//create Trainer
+
 
 import { message } from "antd";
 const Trainer_home = () => {

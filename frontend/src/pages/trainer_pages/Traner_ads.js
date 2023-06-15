@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../../components/Trainer-component/TrainerCard";
-import Footer from "../../components/Online-shopping-components/Footer";
+
 
 function TrainerAD() {
   const [coaches, setcoaches] = useState([]);
