@@ -3,8 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import WorkoutDetailss from "../../components/Trainer-component/WorkoutDetails";
 import "./workouts.css";
 import { Store } from "../../components/Online-shopping-components/Store";
-//import axios from "axios";
-//import "./TrainerReg.css"
+
 
 //create Trainer
 const WorkoutPage = () => {
