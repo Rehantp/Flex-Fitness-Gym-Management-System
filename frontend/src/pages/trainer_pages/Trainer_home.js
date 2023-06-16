@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 import {
@@ -331,9 +330,7 @@ const Trainer_home = () => {
           </div>
         </center>
 
-        {/* <Link to="/TrainerAd">
-          <button className="secondary-button"> ADS</button>
-          </Link> */}
+      
       </div>
     </div>
   );
