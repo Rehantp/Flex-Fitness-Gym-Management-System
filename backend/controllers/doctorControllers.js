@@ -11,8 +11,8 @@ dayjs.extend(customParseFormat);
 // register callback
 // S3 bucket Credintials
 const s3 = new AWS.S3({
-  accessKeyId: "AKIA6H2NBN6UUJVQXS5R",
-  secretAccessKey: "tcYfeH92S9qySRUj3fxhLHMzGkbrkczbC3+oRSwV",
+  accessKeyId: "your  key",
+  secretAccessKey: "your  key",
   region: "us-east-1",
 });
 const DoctorRegisterCtrl = async (req, res) => {
@@ -29,13 +29,13 @@ const DoctorRegisterCtrl = async (req, res) => {
     req.body.password = hashedPassword;
 
     const uploadedImage = await s3
-    .upload({
-      Bucket: "flexfitness-doctor-img",
-      Key: req.file.originalname,
-      Body: req.file.buffer,
-    })
-    .promise();
-    
+      .upload({
+        Bucket: "flexfitness-doctor-img",
+        Key: req.file.originalname,
+        Body: req.file.buffer,
+      })
+      .promise();
+
     const newDoctor = new Doctor({
       name: req.body.name,
       email: req.body.email,
@@ -97,7 +97,7 @@ const updateDoctorProfile = async (req, res) => {
     }
 
     await doctor.save();
-    
+
     res.status(200).send({
       success: true,
       message: "Doctor info updated successfully",
@@ -117,7 +117,7 @@ const deleteDoctorController = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send('No doctor with that id');
+    return res.status(404).send("No doctor with that id");
   }
 
   try {
@@ -125,23 +125,24 @@ const deleteDoctorController = async (req, res) => {
     const deletedDoctor = await Doctor.findByIdAndRemove({ _id: id });
 
     if (!deletedDoctor) {
-      return res.status(404).send('No doctor with that id');
+      return res.status(404).send("No doctor with that id");
     }
 
     // Delete the appointments related to the doctor
     await appointmentModel.deleteMany({ doctorId: id });
 
-    res.json({ message: 'Doctor and associated appointments deleted successfully' });
+    res.json({
+      message: "Doctor and associated appointments deleted successfully",
+    });
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      message: 'Error deleting doctor and associated appointments',
+      message: "Error deleting doctor and associated appointments",
       success: false,
       error: error.message,
     });
   }
-}
-
+};
 
 //get all doctors
 const getAllDoctorsController = async (req, res) => {
@@ -195,12 +196,7 @@ const bookAppointmentByUserController = async (req, res) => {
     await newAppointment.save();
     //pushing notification to doctor based on his userid
     const doctor = await Doctor.findOne({ _id: req.body.doctorInfo.userId });
-    // user.unseenNotifications.push({
-    //   type: "new-appointment-request",
-    //   message: `A new appointment request has been made by ${req.body.userInfo.name}`,
-    //   onClickPath: "/doctor/appointments",
-    // });
-    // await user.save();
+
     res.status(200).send({
       message: "Appointment booked successfully",
       success: true,
@@ -253,7 +249,9 @@ const bookingAvailabilityController = async (req, res) => {
 //get all appointment lists for user
 const getAppointmentListController = async (req, res) => {
   try {
-    const appointments = await appointmentModel.find({ userId: req.params._id });
+    const appointments = await appointmentModel.find({
+      userId: req.params._id,
+    });
     res.status(200).send({
       success: true,
       message: "Appointments List fetched Successfully",
@@ -273,7 +271,9 @@ const getAppointmentListController = async (req, res) => {
 const getDoctorAppointmentByIdController = async (req, res) => {
   try {
     const doctor = await Doctor.findOne({ _id: req.params._id });
-    const appointments = await appointmentModel.find({ doctorId: req.params._id });
+    const appointments = await appointmentModel.find({
+      doctorId: req.params._id,
+    });
     res.status(200).send({
       success: true,
       message: "Appointments List fetched Successfully",
@@ -298,17 +298,6 @@ const changeAppointmentStatusController = async (req, res) => {
       { status }
     );
 
-    // const user = await Doctor.findOne({ _id: appointment.userId });
-    // const unseenNotifications = user.unseenNotifications;
-    // unseenNotifications.push({
-    //   type: "appointment-status-changed",
-    //   message: `Your appointment has been ${status}`,
-    //   onclickPath: "/appointments",
-    // });
-    // await User.findByIdAndUpdate(user._id, { unseenNotifications });
-
-    // await user.save();
-
     res.status(200).send({
       message: "Appointment status updated successfully",
       success: true,
@@ -325,7 +314,9 @@ const changeAppointmentStatusController = async (req, res) => {
 
 const deleteAppointmentController = async (req, res) => {
   try {
-    const appointment = await appointmentModel.findOneAndDelete({ _id: req.params._id });
+    const appointment = await appointmentModel.findOneAndDelete({
+      _id: req.params._id,
+    });
     res.status(200).send({
       success: true,
       message: "Appointment deleted successfully",
@@ -339,7 +330,7 @@ const deleteAppointmentController = async (req, res) => {
       error,
     });
   }
-}
+};
 
 module.exports = {
   DoctorRegisterCtrl,
